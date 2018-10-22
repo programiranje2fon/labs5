@@ -56,7 +56,7 @@ public class HistoricEventTest {
 			// Vracanje System.out na staro
 			System.setOut(pom);
 
-			assertTrue("Za unet NULL title NE ispisuje se rec GRESKA na ekranu", ispis.trim().equalsIgnoreCase("GRESKA"));
+			assertTrue("Za unet NULL title NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
 		} catch (Exception e) {
 			System.setOut(pom);
 			e.printStackTrace();
@@ -83,7 +83,7 @@ public class HistoricEventTest {
 			// Vracanje System.out na staro
 			System.setOut(pom);
 
-			assertTrue("Za unet prekratak title NE ispisuje se rec GRESKA na ekranu", ispis.trim().equalsIgnoreCase("GRESKA"));
+			assertTrue("Za unet prekratak title NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
 		} catch (Exception e) {
 			System.setOut(pom);
 			e.printStackTrace();
@@ -110,7 +110,7 @@ public class HistoricEventTest {
 			// Vracanje System.out na staro
 			System.setOut(pom);
 
-			assertTrue("Za unetu negativnu godinu NE ispisuje se rec GRESKA na ekranu", ispis.trim().equalsIgnoreCase("GRESKA"));
+			assertTrue("Za unetu negativnu godinu NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
 		} catch (Exception e) {
 			System.setOut(pom);
 			e.printStackTrace();
@@ -137,7 +137,7 @@ public class HistoricEventTest {
 			// Vracanje System.out na staro
 			System.setOut(pom);
 
-			assertTrue("Za unet negativan mesec NE ispisuje se rec GRESKA na ekranu", ispis.trim().equalsIgnoreCase("GRESKA"));
+			assertTrue("Za unet negativan mesec NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
 		} catch (Exception e) {
 			System.setOut(pom);
 			e.printStackTrace();
@@ -164,7 +164,7 @@ public class HistoricEventTest {
 			// Vracanje System.out na staro
 			System.setOut(pom);
 
-			assertTrue("Za unet negativan dan NE ispisuje se rec GRESKA na ekranu", ispis.trim().equalsIgnoreCase("GRESKA"));
+			assertTrue("Za unet negativan dan NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
 		} catch (Exception e) {
 			System.setOut(pom);
 			e.printStackTrace();

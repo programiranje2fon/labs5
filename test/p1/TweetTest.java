@@ -28,12 +28,12 @@ public class TweetTest {
 
 	@Test (timeout = 2000)
 	public void attribute_user() {
-		assertEquals("Pocetna vrednost nije 'nepoznato'", "nepoznato", instance.user);
+		assertEquals("Pocetna vrednost nije 'unknown'", "unknown", instance.user);
 	}
 	
 	@Test (timeout = 2000)
 	public void attribute_tweet() {
-		assertEquals("Pocetna vrednost nije 'nepoznato'", "nepoznato", instance.tweet);
+		assertEquals("Pocetna vrednost nije 'unknown'", "unknown", instance.tweet);
 	}
 	
 	@Test (timeout = 2000)
@@ -71,7 +71,7 @@ public class TweetTest {
 			// Vracanje System.out na staro
 			System.setOut(pom);
 
-			assertTrue("Za unet NULL String NE ispisuje se rec GRESKA na ekranu", ispis.trim().equalsIgnoreCase("GRESKA"));
+			assertTrue("Za unet NULL String NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
 		} catch (Exception e) {
 			System.setOut(pom);
 			e.printStackTrace();
@@ -88,7 +88,7 @@ public class TweetTest {
 			// Redirekcija
 			System.setOut(new PrintStream(buffer));
 
-			instance.setUser("nepoznato");
+			instance.setUser("unknown");
 
 			System.out.flush();
 
@@ -98,7 +98,7 @@ public class TweetTest {
 			// Vracanje System.out na staro
 			System.setOut(pom);
 
-			assertTrue("Za unet String 'nepoznato' NE ispisuje se rec GRESKA na ekranu", ispis.trim().equalsIgnoreCase("GRESKA"));
+			assertTrue("Za unet String 'unknown' NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
 		} catch (Exception e) {
 			System.setOut(pom);
 			e.printStackTrace();
@@ -133,7 +133,7 @@ public class TweetTest {
 			// Vracanje System.out na staro
 			System.setOut(pom);
 
-			assertTrue("Za unet NULL String NE ispisuje se rec GRESKA na ekranu", ispis.trim().equalsIgnoreCase("GRESKA"));
+			assertTrue("Za unet NULL String NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
 		} catch (Exception e) {
 			System.setOut(pom);
 			e.printStackTrace();
@@ -162,7 +162,7 @@ public class TweetTest {
 			// Vracanje System.out na staro
 			System.setOut(pom);
 
-			assertTrue("Za unetu predugacku poruku NE ispisuje se rec GRESKA na ekranu", ispis.trim().equalsIgnoreCase("GRESKA"));
+			assertTrue("Za unetu predugacku poruku NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
 		} catch (Exception e) {
 			System.setOut(pom);
 			e.printStackTrace();
