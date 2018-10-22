@@ -1,29 +1,29 @@
-Lab exercise 3
+# Lab exercise 5
 
 ## Problem 1
 (to be done by the tutor in cooperation with students)
 
 Create the class **Tweet** in the **p1** package. The class should include:
 
-1. The attribute **user** that represents the username of the person who has sent the tweet. The initial value is "unknown". **(the String class, assigning a value to a String variable, String values surrounded by double quote marks)**
+1. The attribute **user** that represents the username of the person who has sent the tweet. The initial value is "unknown". 
 
 2. The attribute **tweet** that represents the tweet that the user has sent. The initial value is "unknown".
 
-3. The attribute **time** that represents the date and time when the tweet has been published. The initial value is the current date and time. **(the GregorianCalendar class, initialization of GregorianCalendar objects, "import java.util.*" and the deprecated class Date)**
+3. The attribute **time** that represents the date and time when the tweet has been published. The initial value is the current date and time. 
 
-4. The method **setUser** that takes a username as its parameter and sets the user attribute to that value only if th value is not null and is not "unknown". Otherwise, the method prints "ERROR" on the screen. **(null value, comparing two strings using the equals method)**
+4. The method **setUser** that takes a username as its parameter and sets the user attribute to that value only if th value is not null and is not "unknown". Otherwise, the method prints "ERROR" on the screen. 
 
-5. The method **setTweet** that takes a tweet text as its parameter and sets the tweet attribute to that value if the value is not null, is not an empty String and is up to 140 characters long. Otherwise, the method prints "ERROR" on the screen. **(empty String, the length() method)**
+5. The method **setTweet** that takes a tweet text as its parameter and sets the tweet attribute to that value if the value is not null, is not an empty String and is up to 140 characters long. Otherwise, the method prints "ERROR" on the screen. 
 
-6. The method **countHash** that counts and returns the number of hash tags in the tweet text. Each hash tag starts with the '#' character. **(the charAt() method, looping through a String letter by letter)**
+6. The method **countHash** that counts and returns the number of hash tags in the tweet text. Each hash tag starts with the '#' character. 
 
-7. The method **countWords** that counts and returns the number of words in the tweet text. Assume that each two words are separated by a ' ' character. **(the split() method)**
+7. The method **countWords** that counts and returns the number of words in the tweet text. Assume that each two words are separated by a ' ' character. 
 
-8. The method **print** that prints on the screen the user, the tweet and the time when the tweet was sent, along with an appropriate message. **(String concatenation using the '+' operator, the getTime method)**
+8. The method **print** that prints on the screen the user, the tweet and the time when the tweet was sent, along with an appropriate message. 
 
-9. The method **checkBirthday** that takes a user's birthday (GregorianCalendar) as its parameter. The method first checks if the date passed as the suer's birthday is not null i and if it pertains to a moment in the past. If so, the method checks if the user has written this tweet on his birthday. If fo, the method returns true; in all other cases it returns false. **(the get() method, the GregorianCalendar constants, before() and after() methods)**
+9. The method **checkBirthday** that takes a user's birthday (GregorianCalendar) as its parameter. The method first checks if the date passed as the suer's birthday is not null i and if it pertains to a moment in the past. If so, the method checks if the user has written this tweet on his birthday. If fo, the method returns true; in all other cases it returns false. 
 
-Create the class **TestTweets** in the **p1** package. The class should create a Tweet object in the main method and set the user to "peter121", and the tweet to "This is #my first #tweet". Print all facts about the message and the number of words and hash tags in it. Then create the GregorianCalendar object with the date of 27.10.2001. and check if the user has sent the tweet on his birthday. **(the set() method)**
+Create the class **TestTweets** in the **p1** package. The class should create a Tweet object in the main method and set the user to "peter121", and the tweet to "This is #my first #tweet". Print all facts about the message and the number of words and hash tags in it. Then create the GregorianCalendar object with the date of 27.10.2001. and check if the user has sent the tweet on his birthday. 
 
 
 ## Problem 2
