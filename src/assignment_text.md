@@ -15,7 +15,7 @@ Create the class **Tweet** in the **p1** package. The class should include:
 
 5. The method **setTweet** that takes the text of a tweet as its input parameter and sets the **tweet** attribute to that value if the value is not null, is not an empty String, and is up to 140 characters long. Otherwise, the method prints "ERROR" on the screen. 
 
-6. The method **countHash** that counts and returns the number of hash tags in the tweet's text. Each hash tag starts with the '#' character. 
+6. The method **countHash** that counts and returns the number of '#' characters in the tweet's text. 
 
 7. The method **countWords** that counts and returns the number of words in the tweet's text. Assume that each two words are separated by a ' ' character. 
 
