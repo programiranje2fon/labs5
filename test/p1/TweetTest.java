@@ -1,6 +1,8 @@
 package p1;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -10,34 +12,41 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import p1.Tweet;
-
 public class TweetTest {
 	
-	Tweet instance;
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+	private final PrintStream originalOut = System.out;
+	private final PrintStream originalErr = System.err;
+
+	private Tweet instance;
 
 	@Before
 	public void setUp() throws Exception {
 		instance = new Tweet();
+		System.setOut(new PrintStream(outContent));
+	    System.setErr(new PrintStream(errContent));
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		instance = null;
+		System.setOut(originalOut);
+	    System.setErr(originalErr);
 	}
-
+	
 	@Test (timeout = 2000)
-	public void attribute_user() {
+	public void atribut_user() {
 		assertEquals("Pocetna vrednost nije 'unknown'", "unknown", instance.user);
 	}
 	
 	@Test (timeout = 2000)
-	public void attribute_tweet() {
+	public void atribut_tweet() {
 		assertEquals("Pocetna vrednost nije 'unknown'", "unknown", instance.tweet);
 	}
 	
 	@Test (timeout = 2000)
-	public void attribute_date() {
+	public void atribut_date() {
 		GregorianCalendar dat = new GregorianCalendar();		
 		assertEquals("Pocetna vrednost nije trenutni date i vreme", dat.get(GregorianCalendar.YEAR), instance.date.get(GregorianCalendar.YEAR));
 		assertEquals("Pocetna vrednost nije trenutni date i vreme", dat.get(GregorianCalendar.MONTH), instance.date.get(GregorianCalendar.MONTH));
@@ -45,68 +54,28 @@ public class TweetTest {
 	}
 
 	@Test (timeout = 2000)
-	public void method_setUser() {
+	public void metoda_setUser() {
 		instance.setUser("mika");
 		
 		assertEquals("Kad se unese 'mika' atribut user ne dobija tu vrednost", "mika", instance.user);
 	}
 
 	@Test (timeout = 2000)
-	public void method_setUser_Null() {
-		PrintStream pom = System.out;
-		try {
-			// Otvoren outputstream za redirekciju System.out
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			System.out.flush();
-			// Redirekcija
-			System.setOut(new PrintStream(buffer));
+	public void metoda_setUser_Null() {
+		instance.setUser(null);
 
-			instance.setUser(null);
-
-			System.out.flush();
-
-			// Preuzimanje ispisa metode na ekranu
-			String ispis = buffer.toString();
-
-			// Vracanje System.out na staro
-			System.setOut(pom);
-
-			assertTrue("Za unet NULL String NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
-		} catch (Exception e) {
-			System.setOut(pom);
-			e.printStackTrace();
-		}
+		assertTrue("Za unet NULL String NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 
 	@Test (timeout = 2000)
-	public void method_setUser_Unknown() {
-		PrintStream pom = System.out;
-		try {
-			// Otvoren outputstream za redirekciju System.out
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			System.out.flush();
-			// Redirekcija
-			System.setOut(new PrintStream(buffer));
+	public void metoda_setUser_Unknown() {
+		instance.setUser("unknown");
 
-			instance.setUser("unknown");
-
-			System.out.flush();
-
-			// Preuzimanje ispisa metode na ekranu
-			String ispis = buffer.toString();
-
-			// Vracanje System.out na staro
-			System.setOut(pom);
-
-			assertTrue("Za unet String 'unknown' NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
-		} catch (Exception e) {
-			System.setOut(pom);
-			e.printStackTrace();
-		}
+		assertTrue("Za unet String 'unknown' NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 	
 	@Test (timeout = 2000)
-	public void method_setTweet() {
+	public void metoda_setTweet() {
 		instance.setTweet("Moja tweet");
 		
 		assertEquals("Kad se unese 'Moja tweet' atribut tweet ne dobija tu vrednost", "Moja tweet", instance.tweet);
@@ -115,62 +84,22 @@ public class TweetTest {
 
 	@Test (timeout = 2000)
 	public void method_setTweet_Null() {
-		PrintStream pom = System.out;
-		try {
-			// Otvoren outputstream za redirekciju System.out
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			System.out.flush();
-			// Redirekcija
-			System.setOut(new PrintStream(buffer));
+		instance.setTweet(null);
 
-			instance.setTweet(null);
-
-			System.out.flush();
-
-			// Preuzimanje ispisa metode na ekranu
-			String ispis = buffer.toString();
-
-			// Vracanje System.out na staro
-			System.setOut(pom);
-
-			assertTrue("Za unet NULL String NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
-		} catch (Exception e) {
-			System.setOut(pom);
-			e.printStackTrace();
-		}
+		assertTrue("Za unet NULL String NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 
 	@Test (timeout = 2000)
-	public void method_setTweet_TooLong() {
-		PrintStream pom = System.out;
-		try {
-			// Otvoren outputstream za redirekciju System.out
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			System.out.flush();
-			// Redirekcija
-			System.setOut(new PrintStream(buffer));
+	public void metoda_setTweet_TooLong() {
+		instance.setTweet("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + 
+				"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + 
+				"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
-			instance.setTweet("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + 
-					"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + 
-					"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
-			System.out.flush();
-
-			// Preuzimanje ispisa metode na ekranu
-			String ispis = buffer.toString();
-
-			// Vracanje System.out na staro
-			System.setOut(pom);
-
-			assertTrue("Za unetu predugacku poruku NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
-		} catch (Exception e) {
-			System.setOut(pom);
-			e.printStackTrace();
-		}
+		assertTrue("Za unetu predugacku poruku NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 
 	@Test (timeout = 2000)
-	public void method_countHash() {
+	public void metoda_countHash() {
 		instance.setTweet("Moja tweet sa #jednim ili #dva hes taga.");
 		
 		assertEquals("Ako se unese tweet 'Moja tweet sa #jednim ili #dva hes taga.', ne prebrojava dva taga", 2, instance.countHash());
@@ -193,7 +122,7 @@ public class TweetTest {
 	}
 	
 	@Test (timeout = 2000)
-	public void method_checkBirthday_False() {
+	public void metoda_checkBirthday_False() {
 		GregorianCalendar rodjendan = new GregorianCalendar();
 		
 		rodjendan.set(2004, 1, 29);
@@ -202,12 +131,12 @@ public class TweetTest {
 	}
 	
 	@Test (timeout = 2000)
-	public void method_checkBirthday_Null() {
+	public void metoda_checkBirthday_Null() {
 		assertEquals("Kad se unese NULL kao date rodjenja, metoda ne vraca false", false, instance.checkBirthday(null));
 	}
 	
 	@Test (timeout = 2000)
-	public void method_checkBirthday_FutureDate() {
+	public void metoda_checkBirthday_FutureDate() {
 		GregorianCalendar rodjendan = new GregorianCalendar();
 		
 		rodjendan.set(rodjendan.get(GregorianCalendar.YEAR)+1 , rodjendan.get(GregorianCalendar.MONTH), rodjendan.get(GregorianCalendar.DAY_OF_MONTH));

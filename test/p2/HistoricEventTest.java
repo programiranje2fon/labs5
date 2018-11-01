@@ -1,6 +1,7 @@
 package p2;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -10,24 +11,31 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import p2.HistoricEvent;
-
 public class HistoricEventTest {
 	
-	HistoricEvent instance;
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+	private final PrintStream originalOut = System.out;
+	private final PrintStream originalErr = System.err;
+
+	private HistoricEvent instance;
 
 	@Before
 	public void setUp() throws Exception {
 		instance = new HistoricEvent("Oslobadjanje Beograda", 1945, 10, 20);
+		System.setOut(new PrintStream(outContent));
+	    System.setErr(new PrintStream(errContent));
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		instance = null;
+		System.setOut(originalOut);
+	    System.setErr(originalErr);
 	}
-
+	
 	@Test (timeout = 2000)
-	public void constructor_HistoricEvent() {
+	public void konstruktor_HistoricEvent() {
 		instance = new HistoricEvent("Oslobadjanje Beograda", 1945, 10, 20);
 		
 		assertEquals("Konstruktor ne postavlja title kako treba", "Oslobadjanje Beograda", instance.title);
@@ -37,142 +45,42 @@ public class HistoricEventTest {
 	}
 	
 	@Test (timeout = 2000)
-	public void constructor_HistoricEvent_TitleNULL() {
-		PrintStream pom = System.out;
-		try {
-			// Otvoren outputstream za redirekciju System.out
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			System.out.flush();
-			// Redirekcija
-			System.setOut(new PrintStream(buffer));
+	public void konstruktor_HistoricEvent_TitleNULL() {
+		instance = new HistoricEvent(null, 1945, 10, 20);
 
-			instance = new HistoricEvent(null, 1945, 10, 20);
-
-			System.out.flush();
-
-			// Preuzimanje ispisa metode na ekranu
-			String ispis = buffer.toString();
-
-			// Vracanje System.out na staro
-			System.setOut(pom);
-
-			assertTrue("Za unet NULL title NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
-		} catch (Exception e) {
-			System.setOut(pom);
-			e.printStackTrace();
-		}
+		assertTrue("Za unet NULL title NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 	
 	@Test (timeout = 2000)
-	public void constructor_HistoricEvent_TitleTooShort() {
-		PrintStream pom = System.out;
-		try {
-			// Otvoren outputstream za redirekciju System.out
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			System.out.flush();
-			// Redirekcija
-			System.setOut(new PrintStream(buffer));
+	public void konstruktor_HistoricEvent_TitleTooShort() {
+		instance = new HistoricEvent("Rat2", 1945, 10, 20);
 
-			instance = new HistoricEvent("Rat2", 1945, 10, 20);
-
-			System.out.flush();
-
-			// Preuzimanje ispisa metode na ekranu
-			String ispis = buffer.toString();
-
-			// Vracanje System.out na staro
-			System.setOut(pom);
-
-			assertTrue("Za unet prekratak title NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
-		} catch (Exception e) {
-			System.setOut(pom);
-			e.printStackTrace();
-		}
+		assertTrue("Za unet prekratak title NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 
 	@Test (timeout = 2000)
-	public void constructor_HistoricEvent_YearNegative() {
-		PrintStream pom = System.out;
-		try {
-			// Otvoren outputstream za redirekciju System.out
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			System.out.flush();
-			// Redirekcija
-			System.setOut(new PrintStream(buffer));
+	public void konstruktor_HistoricEvent_YearNegative() {
+		instance = new HistoricEvent("dogadjaj", -1, 10, 20);
 
-			instance = new HistoricEvent("dogadjaj", -1, 10, 20);
-
-			System.out.flush();
-
-			// Preuzimanje ispisa metode na ekranu
-			String ispis = buffer.toString();
-
-			// Vracanje System.out na staro
-			System.setOut(pom);
-
-			assertTrue("Za unetu negativnu godinu NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
-		} catch (Exception e) {
-			System.setOut(pom);
-			e.printStackTrace();
-		}
+		assertTrue("Za unetu negativnu godinu NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 	
 	@Test (timeout = 2000)
-	public void constructor_HistoricEvent_MonthNegative() {
-		PrintStream pom = System.out;
-		try {
-			// Otvoren outputstream za redirekciju System.out
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			System.out.flush();
-			// Redirekcija
-			System.setOut(new PrintStream(buffer));
+	public void konstruktor_HistoricEvent_MonthNegative() {
+		instance = new HistoricEvent("dogadjaj", 1945, -10, 20);
 
-			instance = new HistoricEvent("dogadjaj", 1945, -10, 20);
-
-			System.out.flush();
-
-			// Preuzimanje ispisa metode na ekranu
-			String ispis = buffer.toString();
-
-			// Vracanje System.out na staro
-			System.setOut(pom);
-
-			assertTrue("Za unet negativan mesec NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
-		} catch (Exception e) {
-			System.setOut(pom);
-			e.printStackTrace();
-		}
+		assertTrue("Za unet negativan mesec NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 	
 	@Test (timeout = 2000)
-	public void constructor_HistoricEvent_DayNegative() {
-		PrintStream pom = System.out;
-		try {
-			// Otvoren outputstream za redirekciju System.out
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			System.out.flush();
-			// Redirekcija
-			System.setOut(new PrintStream(buffer));
+	public void konstruktor_HistoricEvent_DayNegative() {
+		instance = new HistoricEvent("dogadjaj", 1945, 10, -5);
 
-			instance = new HistoricEvent("dogadjaj", 1945, 10, -5);
-
-			System.out.flush();
-
-			// Preuzimanje ispisa metode na ekranu
-			String ispis = buffer.toString();
-
-			// Vracanje System.out na staro
-			System.setOut(pom);
-
-			assertTrue("Za unet negativan dan NE ispisuje se rec ERROR na ekranu", ispis.trim().equalsIgnoreCase("ERROR"));
-		} catch (Exception e) {
-			System.setOut(pom);
-			e.printStackTrace();
-		}
+		assertTrue("Za unet negativan dan NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 
 	@Test (timeout = 2000)
-	public void method_getTimePassed() {
+	public void metoda_getTimePassed() {
 		int trenutnaGodina = new GregorianCalendar().get(GregorianCalendar.YEAR);
 		
 		assertEquals("Za dogadjaj iz 1945 godine, ne vraca da je bio pre "+(trenutnaGodina - 1945)+" godina je bio", 
@@ -180,7 +88,7 @@ public class HistoricEventTest {
 	}
 
 	@Test (timeout = 2000)
-	public void method_reverseTitle() {
+	public void metoda_reverseTitle() {
 		assertEquals("Metoda ne vraca title naopako", "adargoeB ejnajdabolsO", instance.reverseTitle());
 	}
 
