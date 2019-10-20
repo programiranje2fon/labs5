@@ -22,7 +22,7 @@ public class HistoricEventTest {
 
 	@Before
 	public void setUp() throws Exception {
-		instance = new HistoricEvent("Oslobadjanje Beograda", 1945, 10, 20);
+		instance = new HistoricEvent("Liberation of Belgrade", 1945, 10, 20);
 		System.setOut(new PrintStream(outContent));
 	    System.setErr(new PrintStream(errContent));
 	}
@@ -35,61 +35,61 @@ public class HistoricEventTest {
 	}
 	
 	@Test (timeout = 2000)
-	public void konstruktor_HistoricEvent() {
-		instance = new HistoricEvent("Oslobadjanje Beograda", 1945, 10, 20);
+	public void constructor_HistoricEvent() {
+		instance = new HistoricEvent("Liberation of Belgrade", 1945, 10, 20);
 		
-		assertEquals("Konstruktor ne postavlja title kako treba", "Oslobadjanje Beograda", instance.title);
-		assertEquals("Konstruktor ne postavlja godinu kako treba", 1945, instance.date.get(GregorianCalendar.YEAR));
-		assertEquals("Konstruktor ne postavlja mesec kako treba", 9, instance.date.get(GregorianCalendar.MONTH));
-		assertEquals("Konstruktor ne postavlja dan kako treba", 20, instance.date.get(GregorianCalendar.DAY_OF_MONTH));		
+		assertEquals("For the passed arguments: \"Liberation of Belgrade\", 1945, 10, 20, the title is not \"Liberation of Belgrade\"", "Liberation of Belgrade", instance.title);
+		assertEquals("For the passed arguments: \"Liberation of Belgrade\", 1945, 10, 20, the year is not 1945", 1945, instance.date.get(GregorianCalendar.YEAR));
+		assertEquals("For the passed arguments: \"Liberation of Belgrade\", 1945, 10, 20, the month is not 9", 9, instance.date.get(GregorianCalendar.MONTH));
+		assertEquals("For the passed arguments: \"Liberation of Belgrade\", 1945, 10, 20, the day is not 20", 20, instance.date.get(GregorianCalendar.DAY_OF_MONTH));		
 	}
 	
 	@Test (timeout = 2000)
-	public void konstruktor_HistoricEvent_TitleNULL() {
+	public void constructor_HistoricEvent_TitleNULL() {
 		instance = new HistoricEvent(null, 1945, 10, 20);
 
-		assertTrue("Za unet NULL title NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When the first argument (title) is NULL, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 	
 	@Test (timeout = 2000)
-	public void konstruktor_HistoricEvent_TitleTooShort() {
-		instance = new HistoricEvent("Rat2", 1945, 10, 20);
+	public void constructor_HistoricEvent_TitleTooShort() {
+		instance = new HistoricEvent("War2", 1945, 10, 20);
 
-		assertTrue("Za unet prekratak title NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When the first argument (title) is shorter than 5 characters, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 
 	@Test (timeout = 2000)
-	public void konstruktor_HistoricEvent_YearNegative() {
+	public void constructor_HistoricEvent_YearNegative() {
 		instance = new HistoricEvent("dogadjaj", -1, 10, 20);
 
-		assertTrue("Za unetu negativnu godinu NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When the second argument (year) is negative, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 	
 	@Test (timeout = 2000)
-	public void konstruktor_HistoricEvent_MonthNegative() {
+	public void constructor_HistoricEvent_MonthNegative() {
 		instance = new HistoricEvent("dogadjaj", 1945, -10, 20);
 
-		assertTrue("Za unet negativan mesec NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When the third argument (month) is negative, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 	
 	@Test (timeout = 2000)
-	public void konstruktor_HistoricEvent_DayNegative() {
+	public void constructor_HistoricEvent_DayNegative() {
 		instance = new HistoricEvent("dogadjaj", 1945, 10, -5);
 
-		assertTrue("Za unet negativan dan NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When the fourth argument (day) is negative, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 
 	@Test (timeout = 2000)
-	public void metoda_getTimePassed() {
+	public void method_getTimePassed() {
 		int trenutnaGodina = new GregorianCalendar().get(GregorianCalendar.YEAR);
 		
-		assertEquals("Za dogadjaj iz 1945 godine, ne vraca da je bio pre "+(trenutnaGodina - 1945)+" godina je bio", 
+		assertEquals("For the event set in year 1945, the method does not return that the number of year passed is " + (trenutnaGodina - 1945), 
 				trenutnaGodina - 1945, instance.getTimePassed());
 	}
 
 	@Test (timeout = 2000)
-	public void metoda_reverseTitle() {
-		assertEquals("Metoda ne vraca title naopako", "adargoeB ejnajdabolsO", instance.reverseTitle());
+	public void method_reverseTitle() {
+		assertEquals("The method does not revert the title properly", "edargleB fo noitarebiL", instance.reverseTitle());
 	}
 
 }

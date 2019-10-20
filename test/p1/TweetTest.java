@@ -36,49 +36,49 @@ public class TweetTest {
 	}
 	
 	@Test (timeout = 2000)
-	public void atribut_user() {
-		assertEquals("Pocetna vrednost nije 'unknown'", "unknown", instance.user);
+	public void attribute_user() {
+		assertEquals("The initial value is not 'unknown'", "unknown", instance.user);
 	}
 	
 	@Test (timeout = 2000)
-	public void atribut_tweet() {
-		assertEquals("Pocetna vrednost nije 'unknown'", "unknown", instance.tweet);
+	public void attribute_tweet() {
+		assertEquals("The initial value is not 'unknown'", "unknown", instance.tweet);
 	}
 	
 	@Test (timeout = 2000)
-	public void atribut_date() {
+	public void attribute_date() {
 		GregorianCalendar dat = new GregorianCalendar();		
-		assertEquals("Pocetna vrednost nije trenutni date i vreme", dat.get(GregorianCalendar.YEAR), instance.date.get(GregorianCalendar.YEAR));
-		assertEquals("Pocetna vrednost nije trenutni date i vreme", dat.get(GregorianCalendar.MONTH), instance.date.get(GregorianCalendar.MONTH));
-		assertEquals("Pocetna vrednost nije trenutni date i vreme", dat.get(GregorianCalendar.DAY_OF_MONTH), instance.date.get(GregorianCalendar.DAY_OF_MONTH));
+		assertEquals("The initial value is not the current date and time", dat.get(GregorianCalendar.YEAR), instance.date.get(GregorianCalendar.YEAR));
+		assertEquals("The initial value is not the current date and time", dat.get(GregorianCalendar.MONTH), instance.date.get(GregorianCalendar.MONTH));
+		assertEquals("The initial value is not the current date and time", dat.get(GregorianCalendar.DAY_OF_MONTH), instance.date.get(GregorianCalendar.DAY_OF_MONTH));
 	}
 
 	@Test (timeout = 2000)
-	public void metoda_setUser() {
-		instance.setUser("mika");
+	public void method_setUser() {
+		instance.setUser("mike");
 		
-		assertEquals("Kad se unese 'mika' atribut user ne dobija tu vrednost", "mika", instance.user);
+		assertEquals("When the argument 'mike' is passed, the attribute user does not have that value", "mike", instance.user);
 	}
 
 	@Test (timeout = 2000)
-	public void metoda_setUser_Null() {
+	public void method_setUser_Null() {
 		instance.setUser(null);
 
-		assertTrue("Za unet NULL String NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("For the argument NULL, the method does not print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 
 	@Test (timeout = 2000)
-	public void metoda_setUser_Unknown() {
+	public void method_setUser_Unknown() {
 		instance.setUser("unknown");
 
-		assertTrue("Za unet String 'unknown' NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("For the argument NULL 'unknown', the method does not print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 	
 	@Test (timeout = 2000)
-	public void metoda_setTweet() {
-		instance.setTweet("Moja tweet");
+	public void method_setTweet() {
+		instance.setTweet("Good morning");
 		
-		assertEquals("Kad se unese 'Moja tweet' atribut tweet ne dobija tu vrednost", "Moja tweet", instance.tweet);
+		assertEquals("For the argument 'Good morning', the attribute tweet doe not contain that String", "Good morning", instance.tweet);
 		
 	}
 
@@ -86,30 +86,30 @@ public class TweetTest {
 	public void method_setTweet_Null() {
 		instance.setTweet(null);
 
-		assertTrue("Za unet NULL String NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("For the argument NULL, the method does not print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 
 	@Test (timeout = 2000)
-	public void metoda_setTweet_TooLong() {
+	public void method_setTweet_TooLong() {
 		instance.setTweet("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + 
 				"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + 
 				"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
-		assertTrue("Za unetu predugacku poruku NE ispisuje se rec ERROR na ekranu", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When an argument with more than 140 letters is passed, the method does not print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
 	}
 
 	@Test (timeout = 2000)
-	public void metoda_countHash() {
-		instance.setTweet("Moja tweet sa #jednim ili #dva hes taga.");
+	public void method_countHash() {
+		instance.setTweet("Good morning #sun #moring.");
 		
-		assertEquals("Ako se unese tweet 'Moja tweet sa #jednim ili #dva hes taga.', ne prebrojava dva taga", 2, instance.countHash());
+		assertEquals("When the attribute tweet has the value 'Good morning #sun #moring.', the method does not return 2 for the number of tags", 2, instance.countHash());
 	}
 
 	@Test (timeout = 2000)
 	public void method_countWords() {
-		instance.setTweet("Moja tweet sa #jednim ili #dva hes taga.");
+		instance.setTweet("Good morning #sun #moring.");
 		
-		assertEquals("Ako se unese tweet 'Moja tweet sa #jednim ili #dva hes taga.', ne prebrojava osam reci", 8, instance.countWords());
+		assertEquals("When the attribute tweet has the value 'Good morning #sun #moring.', the method does not return 4 for the number of words", 4, instance.countWords());
 	}
 
 	@Test (timeout = 2000)
@@ -118,30 +118,30 @@ public class TweetTest {
 		
 		rodjendan.set(2001, rodjendan.get(GregorianCalendar.MONTH), rodjendan.get(GregorianCalendar.DAY_OF_MONTH));
 		
-		assertTrue("Kad se unese danasnji dan i mesec ali 2001. godine kao date rodjenja, metoda ne vraca true", instance.checkBirthday(rodjendan));
+		assertTrue("When the tweet date is set to the current day, if the passed argument is the current date, but with the year set to 2001, the method does not return true", instance.checkBirthday(rodjendan));
 	}
 	
 	@Test (timeout = 2000)
-	public void metoda_checkBirthday_False() {
+	public void method_checkBirthday_False() {
 		GregorianCalendar rodjendan = new GregorianCalendar();
 		
 		rodjendan.set(2004, 1, 29);
 		
-		assertFalse("Kad se unese 29.2.2004. godine kao date rodjenja, metoda ne vraca false", instance.checkBirthday(rodjendan));
+		assertFalse("When the tweet date is set to the current day, if the passed argument is 29.02.2004., the method does not return false", instance.checkBirthday(rodjendan));
 	}
 	
 	@Test (timeout = 2000)
-	public void metoda_checkBirthday_Null() {
-		assertEquals("Kad se unese NULL kao date rodjenja, metoda ne vraca false", false, instance.checkBirthday(null));
+	public void method_checkBirthday_Null() {
+		assertEquals("When passed argument is NULL, the method should return false", false, instance.checkBirthday(null));
 	}
 	
 	@Test (timeout = 2000)
-	public void metoda_checkBirthday_FutureDate() {
+	public void method_checkBirthday_FutureDate() {
 		GregorianCalendar rodjendan = new GregorianCalendar();
 		
 		rodjendan.set(rodjendan.get(GregorianCalendar.YEAR)+1 , rodjendan.get(GregorianCalendar.MONTH), rodjendan.get(GregorianCalendar.DAY_OF_MONTH));
 
-		assertEquals("Kad se unese date rodjenja iz BUDUCNOSTI, metoda ne vraca false", false, instance.checkBirthday(rodjendan));
+		assertEquals("When argument passed is a date from the future, the method should return false", false, instance.checkBirthday(rodjendan));
 	}
 
 }
