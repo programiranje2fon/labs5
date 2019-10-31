@@ -64,14 +64,14 @@ public class TweetTest {
 	public void method_setUser_Null() {
 		instance.setUser(null);
 
-		assertTrue("For the argument NULL, the method does not print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("For the argument NULL, the method does not print ERROR to the console", outContent.toString().toLowerCase().contains("ERROR".toLowerCase()));
 	}
 
 	@Test (timeout = 2000)
 	public void method_setUser_Unknown() {
 		instance.setUser("unknown");
 
-		assertTrue("For the argument NULL 'unknown', the method does not print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("For the argument NULL 'unknown', the method does not print ERROR to the console", outContent.toString().toLowerCase().contains("ERROR".toLowerCase()));
 	}
 	
 	@Test (timeout = 2000)
@@ -86,7 +86,7 @@ public class TweetTest {
 	public void method_setTweet_Null() {
 		instance.setTweet(null);
 
-		assertTrue("For the argument NULL, the method does not print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("For the argument NULL, the method does not print ERROR to the console", outContent.toString().toLowerCase().contains("ERROR".toLowerCase()));
 	}
 
 	@Test (timeout = 2000)
@@ -95,7 +95,7 @@ public class TweetTest {
 				"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + 
 				"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
-		assertTrue("When an argument with more than 140 letters is passed, the method does not print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When an argument with more than 140 letters is passed, the method does not print ERROR to the console", outContent.toString().toLowerCase().contains("ERROR".toLowerCase()));
 	}
 
 	@Test (timeout = 2000)

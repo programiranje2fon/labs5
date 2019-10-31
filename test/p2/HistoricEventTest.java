@@ -48,35 +48,35 @@ public class HistoricEventTest {
 	public void constructor_HistoricEvent_TitleNULL() {
 		instance = new HistoricEvent(null, 1945, 10, 20);
 
-		assertTrue("When the first argument (title) is NULL, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When the first argument (title) is NULL, the method should print ERROR to the console", outContent.toString().toLowerCase().contains("ERROR".toLowerCase()));
 	}
 	
 	@Test (timeout = 2000)
 	public void constructor_HistoricEvent_TitleTooShort() {
 		instance = new HistoricEvent("War2", 1945, 10, 20);
 
-		assertTrue("When the first argument (title) is shorter than 5 characters, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When the first argument (title) is shorter than 5 characters, the method should print ERROR to the console", outContent.toString().toLowerCase().contains("ERROR".toLowerCase()));
 	}
 
 	@Test (timeout = 2000)
 	public void constructor_HistoricEvent_YearNegative() {
 		instance = new HistoricEvent("dogadjaj", -1, 10, 20);
 
-		assertTrue("When the second argument (year) is negative, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When the second argument (year) is negative, the method should print ERROR to the console", outContent.toString().toLowerCase().contains("ERROR".toLowerCase()));
 	}
 	
 	@Test (timeout = 2000)
 	public void constructor_HistoricEvent_MonthNegative() {
 		instance = new HistoricEvent("dogadjaj", 1945, -10, 20);
 
-		assertTrue("When the third argument (month) is negative, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When the third argument (month) is negative, the method should print ERROR to the console", outContent.toString().toLowerCase().contains("ERROR".toLowerCase()));
 	}
 	
 	@Test (timeout = 2000)
 	public void constructor_HistoricEvent_DayNegative() {
 		instance = new HistoricEvent("dogadjaj", 1945, 10, -5);
 
-		assertTrue("When the fourth argument (day) is negative, the method should print ERROR to the console", outContent.toString().trim().equalsIgnoreCase("ERROR"));
+		assertTrue("When the fourth argument (day) is negative, the method should print ERROR to the console", outContent.toString().toLowerCase().contains("ERROR".toLowerCase()));
 	}
 
 	@Test (timeout = 2000)
